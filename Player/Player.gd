@@ -5,8 +5,9 @@ const GRAVITY = 300
 const UP = Vector2.UP		# Vector2(0, -1)
 const JUMP_SPEED = 3500
 
-var motion = Vector2.ZERO
+signal animate
 var isJumping = false 	 	# bool flag to smooth jumping right after moving left/right
+var motion = Vector2.ZERO
 
 func _physics_process(delta):
 	apply_Gravity()
@@ -40,16 +41,7 @@ func Move():
 
 
 func Animate():
-	if motion.y < 0:
-		$AnimatedSprite.play("jump")
-	elif motion.x > 0:
-		$AnimatedSprite.play("walk")
-		$AnimatedSprite.flip_h = false
-	elif motion.x < 0:
-		$AnimatedSprite.play("walk")
-		$AnimatedSprite.flip_h = true
-	else:
-		$AnimatedSprite.play("idle")
+	emit_signal("animate", motion)
 
 
 
