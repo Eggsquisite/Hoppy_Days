@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-const SPEED = 500
-const GRAVITY = 50
+const SPEED = 1000
+const GRAVITY = 300
 const UP = Vector2.UP		# Vector2(0, -1)
-const JUMP_SPEED = 1000
+const JUMP_SPEED = 3500
 
 var motion = Vector2.ZERO
 var isJumping = false 	 	# bool flag to smooth jumping right after moving left/right
@@ -12,6 +12,7 @@ func _physics_process(delta):
 	apply_Gravity()
 	Jump()
 	Move()
+	Animate()
 	move_and_slide(motion, UP)
 
 
@@ -24,7 +25,7 @@ func apply_Gravity():
 
 
 func Jump():
-	if Input.is_action_just_pressed("jump") and isJumping == false:
+	if Input.is_action_pressed("jump") and isJumping == false:
 		isJumping = true
 		motion.y -= JUMP_SPEED
 
@@ -36,3 +37,24 @@ func Move():
 		motion.x = SPEED
 	else:
 		motion.x = 0
+
+
+func Animate():
+	if motion.y < 0:
+		$AnimatedSprite.play("jump")
+	elif motion.x > 0:
+		$AnimatedSprite.play("walk")
+		$AnimatedSprite.flip_h = false
+	elif motion.x < 0:
+		$AnimatedSprite.play("walk")
+		$AnimatedSprite.flip_h = true
+	else:
+		$AnimatedSprite.play("idle")
+
+
+
+
+
+
+
+
