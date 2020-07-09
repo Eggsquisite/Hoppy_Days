@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
 const SPEED = 1000
-const GRAVITY = 300
+const GRAVITY = 150
 const UP = Vector2.UP		# Vector2(0, -1)
-const JUMP_SPEED = 3500
+const JUMP_SPEED = 2500
 
 signal animate
 var isJumping = false 	 	# bool flag to smooth jumping right after moving left/right
@@ -26,7 +26,7 @@ func apply_Gravity():
 
 
 func Jump():
-	if Input.is_action_pressed("jump") and isJumping == false:
+	if Input.is_action_just_pressed("jump") and isJumping == false:
 		isJumping = true
 		motion.y -= JUMP_SPEED
 
