@@ -21,14 +21,16 @@ func apply_Gravity():
 	if is_on_floor():
 		motion.y = 0
 		isJumping = false
+	elif is_on_ceiling():
+		motion.y = 5
 	else: 
-		motion.y += GRAVITY
+		motion.y += GRAVITY		# positive y values go down
 
 
 func Jump():
 	if Input.is_action_just_pressed("jump") and isJumping == false:
 		isJumping = true
-		motion.y -= JUMP_SPEED
+		motion.y -= JUMP_SPEED	# negative y values go up
 
 
 func Move():

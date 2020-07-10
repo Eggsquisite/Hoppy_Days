@@ -23,6 +23,5 @@ shape = SubResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 2.5, 2.5 )
-limit_left = 0
 smoothing_enabled = true
 [connection signal="animate" from="." to="PlayerAnimation" method="_on_Player_animate"]
