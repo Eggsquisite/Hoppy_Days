@@ -4,6 +4,7 @@ const SPEED = 1000
 const GRAVITY = 150
 const UP = Vector2.UP		# Vector2(0, -1)
 const JUMP_SPEED = 2500
+const WORLD_LIMIT = 3000
 
 signal animate
 var isJumping = false 	 	# bool flag to smooth jumping right after moving left/right
@@ -18,6 +19,8 @@ func _physics_process(delta):
 
 
 func apply_Gravity():
+	if position.y > WORLD_LIMIT:
+		end_game()
 	if is_on_floor():
 		motion.y = 0
 		isJumping = false
@@ -46,6 +49,8 @@ func Animate():
 	emit_signal("animate", motion)
 
 
+func end_game():
+	get_tree().change_scene("res://Levels/GameOver.tscn")
 
 
 
