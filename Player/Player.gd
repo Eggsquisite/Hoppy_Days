@@ -7,6 +7,7 @@ const JUMP_SPEED = 2500
 const WORLD_LIMIT = 3000
 
 signal animate
+var lives = 3
 var isJumping = false 	 	# bool flag to smooth jumping right after moving left/right
 var motion = Vector2.ZERO
 
@@ -25,7 +26,7 @@ func apply_Gravity():
 		motion.y = 0
 		isJumping = false
 	elif is_on_ceiling():
-		motion.y = 5
+		motion.y = GRAVITY
 	else: 
 		motion.y += GRAVITY		# positive y values go down
 
@@ -47,6 +48,15 @@ func Move():
 
 func Animate():
 	emit_signal("animate", motion)
+
+
+func hurt():
+	position.y -= 1
+	yield(get_tree(), "idle_frame") 	# wait a frame, then jump will work as it's not affected by gravity when is_on_floor
+	motion.y -= JUMP_SPEED
+	lives -= 1
+	if lives <= 0:
+		end_game()
 
 
 func end_game():

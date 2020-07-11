@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Levels/Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Hazards/SpikeTop.tscn" type="PackedScene" id=3]
 
 [node name="Level1" type="Node2D"]
 
@@ -14,3 +15,38 @@ collision_layer = 2147483650
 collision_mask = 2147483649
 format = 1
 tile_data = PoolIntArray( -1179612, 5, 0, -1179563, 5, 0, -1048562, 4, 0, -1048533, 2, 0, -1048505, 5, 0, -983013, 5, 0, -982987, 4, 0, -982963, 2, 0, -917501, 1, 0, -917413, 2, 0, -851905, 2, 0, -851843, 6, 0, -786332, 2, 0, -786317, 6, 0, -720857, 4, 0, -589779, 1, 0, -589713, 5, 0, -589691, 6, 0, -524288, 1, 0, -524266, 1, 0, -524239, 1, 0, -524231, 4, 0, -524216, 5, 0, -524208, 4, 0, -458658, 5, 0, -458609, 4, 0, -393206, 1, 0, -393163, 1, 0, -327652, 0, 0, -327577, 6, 0, -327561, 4, 0, -262106, 0, 0, -262067, 3, 0, -262006, 1, 0, -196593, 0, 0, -196554, -1073741820, 0, -196553, -1610612732, 0, -196541, 2, 0, -196517, 2, 0, -196497, 6, 0, -196456, 6, 0, -131069, 1, 0, 87, 3, 0, 99, 3, 0, 118, 3, 0, 131, 4, 0, 65581, 2, 0, 65683, 6, 0, 131133, 2, 0, 196645, 3, 0, 196662, -1073741820, 0, 196663, -1610612732, 0, 196731, 4, 0, 262171, 3, 0, 262258, 3, 0, 262283, 1, 0, 327750, 3, 0, 327781, 3, 0, 393229, 2, 0, 393249, 3, 0, 393258, 2, 0, 393361, 7, 0, 458755, 2, 0, 458881, 1, 0, 524396, 2, 0, 589844, 2, 0, 589878, -1073741820, 0, 589879, -1610612732, 0, 589884, 5, 0, 655425, 2, 0, 720904, 2, 0 )
+
+[node name="Hazards" type="Node" parent="."]
+
+[node name="SpikeTop" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 1161.29, 369.751 )
+
+[node name="SpikeTop2" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 1514.89, 549.548 )
+
+[node name="SpikeTop3" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 3100.1, 49.1133 )
+
+[node name="SpikeTop4" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 3216.97, -535.227 )
+
+[node name="SpikeTop5" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 3582.72, -981.063 )
+
+[node name="SpikeTop6" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 4482.16, -208.902 )
+
+[node name="SpikeTop7" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 6116.99, -469.118 )
+
+[node name="SpikeTop8" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 7200.34, 489.87 )
+
+[node name="SpikeTop9" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 7709.33, -342.575 )
+
+[node name="SpikeTop10" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 8946.1, -275.979 )
+
+[node name="SpikeTop11" parent="Hazards" instance=ExtResource( 3 )]
+position = Vector2( 9578.76, 47.4849 )
