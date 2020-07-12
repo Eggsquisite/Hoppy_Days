@@ -5,8 +5,11 @@ const GRAVITY = 150
 const UP = Vector2.UP		# Vector2(0, -1)
 const JUMP_SPEED = 2500
 const WORLD_LIMIT = 3000
+const BOOST_MULTIPLIER = 2
+const HURT_MULTIPLIER = 1.25
 
 signal animate
+
 var lives = 3
 var isJumping = false 	 	# bool flag to smooth jumping right after moving left/right
 var motion = Vector2.ZERO
@@ -35,6 +38,7 @@ func Jump():
 	if Input.is_action_just_pressed("jump") and isJumping == false:
 		isJumping = true
 		motion.y -= JUMP_SPEED	# negative y values go up
+		$JumpSFX.play()
 
 
 func Move():
@@ -50,11 +54,20 @@ func Animate():
 	emit_signal("animate", motion)
 
 
+func boost():
+	position.y -= 1
+	motion.y = 0
+	yield(get_tree(), "idle_frame") 	
+	motion.y -= JUMP_SPEED * BOOST_MULTIPLIER
+
+
 func hurt():
 	position.y -= 1
+	motion.y = 0
 	yield(get_tree(), "idle_frame") 	# wait a frame, then jump will work as it's not affected by gravity when is_on_floor
-	motion.y -= JUMP_SPEED
+	motion.y -= JUMP_SPEED * HURT_MULTIPLIER
 	lives -= 1
+	$HurtSFX.play()
 	if lives <= 0:
 		end_game()
 
