@@ -10,7 +10,7 @@ const HURT_MULTIPLIER = 1.25
 
 signal animate
 
-var lives = 3
+# var lives = 3
 var isJumping = false 	 	# bool flag to smooth jumping right after moving left/right
 var motion = Vector2.ZERO
 
@@ -24,7 +24,7 @@ func _physics_process(delta):
 
 func apply_Gravity():
 	if position.y > WORLD_LIMIT:
-		end_game()
+		get_tree().call_group("Gamestate", "end_game")
 	if is_on_floor():
 		motion.y = 0
 		isJumping = false
@@ -66,14 +66,7 @@ func hurt():
 	motion.y = 0
 	yield(get_tree(), "idle_frame") 	# wait a frame, then jump will work as it's not affected by gravity when is_on_floor
 	motion.y -= JUMP_SPEED * HURT_MULTIPLIER
-	lives -= 1
 	$HurtSFX.play()
-	if lives <= 0:
-		end_game()
-
-
-func end_game():
-	get_tree().change_scene("res://Levels/GameOver.tscn")
 
 
 
