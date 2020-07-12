@@ -58,6 +58,7 @@ func boost():
 	position.y -= 1
 	motion.y = 0
 	yield(get_tree(), "idle_frame") 	
+	isJumping = true
 	motion.y -= JUMP_SPEED * BOOST_MULTIPLIER
 
 
