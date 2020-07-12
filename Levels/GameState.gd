@@ -1,6 +1,6 @@
 extends Node2D
 
-var lives = 4
+var lives = 3
 var coins = 0
 var coins_To_Life = 10
 
@@ -14,7 +14,7 @@ func hurt():
 	$Player.hurt()
 	update_GUI()
 	
-	if lives <= 0:
+	if lives < 0:
 		end_game()
 
 

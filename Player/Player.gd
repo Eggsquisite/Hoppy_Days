@@ -38,7 +38,15 @@ func Jump():
 	if Input.is_action_just_pressed("jump") and isJumping == false:
 		isJumping = true
 		motion.y -= JUMP_SPEED	# negative y values go up
-		$JumpSFX.play()
+		jump_sfx()
+
+
+func jump_sfx():
+	$JumpSFX.play()
+
+
+func hurt_sfx():
+	$HurtSFX.play()
 
 
 func Move():
@@ -60,6 +68,7 @@ func boost():
 	yield(get_tree(), "idle_frame") 	
 	isJumping = true
 	motion.y = -JUMP_SPEED * BOOST_MULTIPLIER
+	jump_sfx()
 
 
 func hurt():
@@ -68,7 +77,7 @@ func hurt():
 	yield(get_tree(), "idle_frame") 	# wait a frame, then jump will work as it's not affected by gravity when is_on_floor
 	isJumping = true
 	motion.y = -JUMP_SPEED * HURT_MULTIPLIER
-	$HurtSFX.play()
+	hurt_sfx()
 
 
 
