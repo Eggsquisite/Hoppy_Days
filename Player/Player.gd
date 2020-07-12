@@ -25,7 +25,7 @@ func _physics_process(delta):
 func apply_Gravity():
 	if position.y > WORLD_LIMIT:
 		get_tree().call_group("Gamestate", "end_game")
-	if is_on_floor():
+	if is_on_floor() and motion.y > 0:
 		motion.y = 0
 		isJumping = false
 	elif is_on_ceiling():
@@ -59,14 +59,15 @@ func boost():
 	motion.y = 0
 	yield(get_tree(), "idle_frame") 	
 	isJumping = true
-	motion.y -= JUMP_SPEED * BOOST_MULTIPLIER
+	motion.y = -JUMP_SPEED * BOOST_MULTIPLIER
 
 
 func hurt():
 	position.y -= 1
 	motion.y = 0
 	yield(get_tree(), "idle_frame") 	# wait a frame, then jump will work as it's not affected by gravity when is_on_floor
-	motion.y -= JUMP_SPEED * HURT_MULTIPLIER
+	isJumping = true
+	motion.y = -JUMP_SPEED * HURT_MULTIPLIER
 	$HurtSFX.play()
 
 
