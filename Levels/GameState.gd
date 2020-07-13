@@ -43,5 +43,9 @@ func end_game():
 	get_tree().change_scene("res://Levels/GameOver.tscn")
 
 
+func win_game():
+	get_tree().change_scene("res://Levels/Victory.tscn")
+
+
 func _on_EndgameTimer_timeout():
 	end_game()
