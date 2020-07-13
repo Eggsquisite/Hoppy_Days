@@ -12,10 +12,11 @@ func _ready():
 func hurt():
 	lives -= 1
 	$Player.hurt()
-	update_GUI()
+	if lives >= 0:
+		update_GUI()
 	
 	if lives < 0:
-		end_game()
+		end_game_timer()
 
 
 func coin_pickup():
@@ -33,5 +34,14 @@ func update_GUI():
 	get_tree().call_group("GUI", "update_gui", lives, coins)
 
 
+func end_game_timer():
+	$EndgameTimer.start()
+	get_tree().call_group("Player", "death")
+
+
 func end_game():
 	get_tree().change_scene("res://Levels/GameOver.tscn")
+
+
+func _on_EndgameTimer_timeout():
+	end_game()

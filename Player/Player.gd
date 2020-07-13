@@ -11,19 +11,21 @@ const HURT_MULTIPLIER = 1.25
 signal animate
 
 # var lives = 3
+var death = false
 var isJumping = false 	 	# bool flag to smooth jumping right after moving left/right
 var motion = Vector2.ZERO
 
 func _physics_process(delta):
 	apply_Gravity()
 	Jump()
-	Move()
 	Animate()
+	if not death:
+		Move()
 	move_and_slide(motion, UP)
 
 
 func apply_Gravity():
-	if position.y > WORLD_LIMIT:
+	if position.y > WORLD_LIMIT and not death:
 		get_tree().call_group("Gamestate", "end_game")
 	if is_on_floor() and motion.y > 0:
 		motion.y = 0
@@ -60,7 +62,7 @@ func Move():
 
 func Animate():
 	emit_signal("animate", motion)
-
+	
 
 func boost():
 	position.y -= 1
@@ -78,6 +80,19 @@ func hurt():
 	isJumping = true
 	motion.y = -JUMP_SPEED * HURT_MULTIPLIER
 	hurt_sfx()
+
+
+func death():
+	death = true
+	motion.x = 0
+	$CollisionShape2D.disabled = true
+	stop_camera_movement()
+
+
+func stop_camera_movement():
+	var camera_position = $Camera2D.global_position
+	$Camera2D.set_as_toplevel(true)
+	$Camera2D.global_position = camera_position
 
 
 
